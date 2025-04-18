@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import Webcam from 'react-webcam';
 import { Stage, Layer, Line, Text } from 'react-konva';
 
-const socket = io('http://localhost:5000');
+const socket = io('https://two215000078.onrender.com');
 
 function App() {
   const [roomId, setRoomId] = useState('');
