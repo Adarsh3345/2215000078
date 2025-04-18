@@ -7,13 +7,23 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-# Store rooms and participants
-rooms = {}  # {room_id: {'creator': socket_id, 'join_key': key}}
-participants = {}  # {room_id: [socket_ids]}
+rooms = {} 
+participants = {}  
 
 def generate_join_key():
     characters = string.ascii_letters + string.digits
     return ''.join(secrets.choice(characters) for _ in range(8))
+
+
+@app.route('/')
+def home():
+    return jsonify({
+        "status": "running",
+        "message": "Socket.IO server is operational",
+        "routes": {
+            "socket_io": "ws://two215000078.onrender.com/socket.io/"
+        }
+    })
 
 @socketio.on('connect')
 def handle_connect():
